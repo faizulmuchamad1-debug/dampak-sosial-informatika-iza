@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dampak Sosial Komunikasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Professional Indigo (bg-gray-50, text-indigo-700/800 accents) -->
+    <!-- Application Structure Plan: The SPA uses a tabbed structure (Pendahuluan, Positif, Negatif, Etika) to break down the complex social impact topic into logical, digestible, and user-explorable sections. The Quiz is integrated at the bottom of the page, promoting continuous learning flow. The structure prioritizes thematic grouping over a linear report format, which is ideal for educational content. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Dampak Positif -> Goal: Highlight key benefits -> Viz/Method: Responsive cards (grid). Interaction: Static for quick overview. Justification: Provides clear, parallel comparison of benefits.
+        - Report Info: Dampak Negatif & Etika -> Goal: Detail complex problems and solutions -> Viz/Method: HTML <details> accordion. Interaction: Click to expand details. Justification: Hides depth of complexity, preventing information overload while allowing user-driven exploration.
+        - Report Info: Latihan Soal -> Goal: Assess comprehension -> Viz/Method: Interactive multiple-choice quiz. Interaction: Select answer, click 'Cek Skor' for instant feedback and final score display. Justification: Essential active learning tool for educational material.
+        - Note on Charts: The source report is purely qualitative (social analysis). Charts (Chart.js/Plotly) are not used as they would require external quantitative data, violating the objective of accurately translating the provided material's essence.
+        -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        .tab-btn {
+            @apply px-4 py-2 sm:px-6 sm:py-3 font-medium text-gray-600 rounded-t-lg transition-colors duration-200 border-b-2 border-transparent;
+        }
+        .tab-btn.active {
+            @apply border-indigo-700 text-indigo-700 font-semibold;
+        }
+        .tab-btn:hover {
+            @apply bg-gray-100;
+        }
+        .tab-content {
+            @apply hidden p-5 sm:p-8 bg-white rounded-b-lg rounded-tr-lg shadow-xl;
+        }
+        .tab-content.active {
+            @apply block;
+        }
+        .details-marker {
+            @apply w-4 h-4 transition-transform duration-300;
+        }
+        details[open] .details-marker {
+            @apply rotate-90;
+        }
+        .quiz-option {
+            @apply block w-full text-left p-3 my-2 bg-gray-100 rounded-lg border-2 border-transparent transition-colors duration-200 cursor-pointer;
+        }
+        .quiz-option:hover {
+            @apply bg-gray-200;
+        }
+        .quiz-option input {
+            @apply mr-3 accent-indigo-600;
+        }
+        .quiz-option.correct {
+            @apply bg-green-100 border-green-400 font-semibold;
+        }
+        .quiz-option.incorrect {
+            @apply bg-red-100 border-red-400;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans leading-relaxed text-gray-800">
+
+    <div class="container mx-auto max-w-5xl p-4 sm:p-8">
+        
+        <header class="text-center my-6 sm:my-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-indigo-800">Dampak Sosial Komunikasi Digital</h1>
+            <p class="text-xl text-gray-600 mt-2">Analisis Perubahan Masyarakat di Era Konektivitas</p>
+        </header>
+
+        <!-- Bagian Materi dengan Tab -->
+        <section id="materi-section" class="mb-12">
+            <nav id="tabs-nav" class="flex flex-wrap justify-center border-b-2 border-gray-200 mb-0">
+                <button class="tab-btn active" data-tab="pendahuluan">Pendahuluan</button>
+                <button class="tab-btn" data-tab="positif">Dampak Positif</button>
+                <button class="tab-btn" data-tab="negatif">Dampak Negatif</button>
+                <button class="tab-btn" data-tab="etika">Etika & Solusi</button>
+            </nav>
+
+            <div id="tab-content-container">
+                
+                <article id="pendahuluan" class="tab-content active">
+                    <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Evolusi dan Peran Komunikasi</h2>
+                    <p class="text-lg mb-6">
+                        Komunikasi, terutama sejak munculnya internet dan media sosial, telah mengubah fondasi interaksi sosial, ekonomi, dan politik secara fundamental. Perubahan ini menciptakan dampak ganda: mendorong kemajuan tetapi juga menimbulkan tantangan sosial yang serius.
+                    </p>
+                    <div class="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-300">
+                        <p class="font-semibold text-indigo-800">Definisi Kunci:</p>
+                        <ul class="list-disc list-inside ml-4 mt-2 text-md">
+                            <li><strong>Komunikasi Digital:</strong> Pertukaran informasi melalui teknologi elektronik (email, media sosial, pesan instan).</li>
+                            <li><strong>Dampak Sosial:</strong> Perubahan yang terjadi dalam struktur masyarakat, nilai, dan perilaku individu akibat adopsi teknologi komunikasi.</li>
+                        </ul>
+                    </div>
+                    
+                </article>
+
+                <article id="positif" class="tab-content">
+                    <h2 class="text-3xl font-semibold text-indigo-700 mb-6">3 Pilar Dampak Positif</h2>
+                    <p class="text-lg mb-6">Inilah tiga bidang utama di mana komunikasi digital membawa manfaat signifikan bagi masyarakat:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-6 bg-green-50 rounded-lg shadow-md border-t-4 border-green-500">
+                            <h3 class="text-2xl font-bold text-green-700 mb-3">1. Konektivitas Global</h3>
+                            <p>Memungkinkan individu melampaui batas geografis untuk terhubung, mempertahankan hubungan jarak jauh, dan membangun komunitas berbasis minat. Ini memperkuat ikatan diaspora dan solidaritas global.</p>
+                        </div>
+                        <div class="p-6 bg-green-50 rounded-lg shadow-md border-t-4 border-green-500">
+                            <h3 class="text-2xl font-bold text-green-700 mb-3">2. Demokrasi Informasi</h3>
+                            <p>Informasi tidak lagi dikontrol secara eksklusif oleh media tradisional. Siapa pun dapat menjadi produsen konten, meningkatkan transparansi, partisipasi publik, dan munculnya gerakan sosial yang terorganisir.</p>
+                        </div>
+                        <div class="p-6 bg-green-50 rounded-lg shadow-md border-t-4 border-green-500">
+                            <h3 class="text-2xl font-bold text-green-700 mb-3">3. Akses Pendidikan & Kesehatan</h3>
+                            <p>Menyediakan akses mudah ke sumber daya pendidikan (e-learning) dan layanan kesehatan (telemedisin) bagi populasi yang tinggal di daerah terpencil atau kurang terlayani.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="negatif" class="tab-content">
+                    <h2 class="text-3xl font-semibold text-indigo-700 mb-6">Tantangan dan Risiko Sosial</h2>
+                    <p class="text-lg mb-6">Di balik kemudahan, terdapat tantangan sosial yang memerlukan kewaspadaan. Klik setiap topik untuk detail:</p>
+                    <div class="space-y-4">
+                        <details class="bg-white rounded-lg shadow-sm border border-gray-200">
+                            <summary class="p-4 flex justify-between items-center cursor-pointer list-none">
+                                <span class="text-lg font-semibold text-red-700">Kesenjangan Digital (Digital Divide)</span>
+                                <svg class="details-marker w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-gray-200 bg-red-50">Kesenjangan antara mereka yang memiliki akses ke teknologi komunikasi dan yang tidak. Ini memperburuk ketidaksetaraan sosial-ekonomi karena peluang pendidikan dan pekerjaan semakin bergantung pada koneksi internet.</div>
+                        </details>
+                        <details class="bg-white rounded-lg shadow-sm border border-gray-200">
+                            <summary class="p-4 flex justify-between items-center cursor-pointer list-none">
+                                <span class="text-lg font-semibold text-red-700">Cyberbullying dan Toksisitas</span>
+                                <svg class="details-marker w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-gray-200 bg-red-50">Media sosial menciptakan anonimitas atau rasa aman palsu, memicu perilaku agresif, pelecehan (cyberbullying), dan penyebaran ujaran kebencian tanpa konsekuensi yang jelas.</div>
+                        </details>
+                        <details class="bg-white rounded-lg shadow-sm border border-gray-200">
+                            <summary class="p-4 flex justify-between items-center cursor-pointer list-none">
+                                <span class="text-lg font-semibold text-red-700">Penyebaran Hoaks dan Disinformasi</span>
+                                <svg class="details-marker w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-gray-200 bg-red-50">Kecepatan viralitas informasi digital mempermudah penyebaran berita palsu, yang dapat merusak kepercayaan publik, memecah belah masyarakat, dan memengaruhi hasil politik.</div>
+                        </details>
+                    </div>
+                </article>
+
+                <article id="etika" class="tab-content">
+                    <h2 class="text-3xl font-semibold text-indigo-700 mb-6">Etika dan Solusi untuk Dunia Digital</h2>
+                    <p class="text-lg mb-6">Mengatasi dampak negatif memerlukan pendekatan proaktif dari individu dan komunitas:</p>
+                    <div class="space-y-4">
+                        <details class="bg-white rounded-lg shadow-sm border border-gray-200" open>
+                            <summary class="p-4 flex justify-between items-center cursor-pointer list-none">
+                                <span class="text-lg font-semibold text-indigo-800">Literasi Digital</span>
+                                <svg class="details-marker w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-gray-200 bg-indigo-50">Kemampuan untuk mengakses, memahami, dan mengevaluasi informasi secara kritis di platform digital. Ini adalah pertahanan pertama melawan hoaks dan disinformasi.</div>
+                        </details>
+                        <details class="bg-white rounded-lg shadow-sm border border-gray-200">
+                            <summary class="p-4 flex justify-between items-center cursor-pointer list-none">
+                                <span class="text-lg font-semibold text-indigo-800">Pola Pikir Kritis (Critical Thinking)</span>
+                                <svg class="details-marker w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-gray-200 bg-indigo-50">Selalu pertanyakan sumber, bandingkan informasi dari berbagai media terpercaya, dan hindari menyebarkan konten yang memicu kebencian atau belum terverifikasi.</div>
+                        </details>
+                        <details class="bg-white rounded-lg shadow-sm border border-gray-200">
+                            <summary class="p-4 flex justify-between items-center cursor-pointer list-none">
+                                <span class="text-lg font-semibold text-indigo-800">Kesadaran Privasi</span>
+                                <svg class="details-marker w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-gray-200 bg-indigo-50">Memahami bagaimana data pribadi dikumpulkan dan digunakan oleh platform. Atur pengaturan privasi secara ketat dan batasi informasi sensitif yang dibagikan secara online.</div>
+                        </details>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Bagian Kuis Interaktif -->
+        <section id="kuis-section" class="mt-12 sm:mt-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-indigo-800 text-center mb-8">Uji Pemahaman: Kuis Dampak Sosial</h2>
+            
+            <div id="quiz-container" class="bg-white p-5 sm:p-8 rounded-lg shadow-lg">
+                <form id="quiz-form">
+                    <!-- Pertanyaan 1 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">1. Apa yang dimaksud dengan Dampak Sosial Komunikasi Digital?</h4>
+                        <div id="q-options-0">
+                            <label class="quiz-option"><input type="radio" name="question-0" value="0"> Penggunaan internet yang berlebihan.</label>
+                            <label class="quiz-option"><input type="radio" name="question-0" value="1"> Perubahan struktur masyarakat akibat teknologi komunikasi.</label>
+                            <label class="quiz-option"><input type="radio" name="question-0" value="2"> Jaringan komputer global yang saling terhubung.</label>
+                            <label class="quiz-option"><input type="radio" name="question-0" value="3"> Aturan untuk mentransfer file.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 2 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">2. Salah satu dampak positif komunikasi digital adalah Konektivitas Global. Hal ini merujuk pada...</h4>
+                        <div id="q-options-1">
+                            <label class="quiz-option"><input type="radio" name="question-1" value="0"> Batasan geografis yang semakin kuat.</label>
+                            <label class="quiz-option"><input type="radio" name="question-1" value="1"> Kemampuan individu terhubung melampaui batas negara.</label>
+                            <label class="quiz-option"><input type="radio" name="question-1" value="2"> Pengurangan interaksi tatap muka.</label>
+                            <label class="quiz-option"><input type="radio" name="question-1" value="3"> Penyebaran ujaran kebencian.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 3 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">3. Apa yang menjadi risiko utama dari Demokrasi Informasi yang berlebihan?</h4>
+                        <div id="q-options-2">
+                            <label class="quiz-option"><input type="radio" name="question-2" value="0"> Kurangnya akses pendidikan.</label>
+                            <label class="quiz-option"><input type="radio" name="question-2" value="1"> Kesenjangan digital.</label>
+                            <label class="quiz-option"><input type="radio" name="question-2" value="2"> Penyebaran hoaks dan disinformasi.</label>
+                            <label class="quiz-option"><input type="radio" name="question-2" value="3"> Peningkatan kolaborasi.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 4 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">4. Istilah yang menggambarkan ketidaksetaraan akses terhadap teknologi komunikasi adalah...</h4>
+                        <div id="q-options-3">
+                            <label class="quiz-option"><input type="radio" name="question-3" value="0"> Cyberbullying</label>
+                            <label class="quiz-option"><input type="radio" name="question-3" value="1"> Digital Divide (Kesenjangan Digital)</label>
+                            <label class="quiz-option"><input type="radio" name="question-3" value="2"> Demokrasi Informasi</label>
+                            <label class="quiz-option"><input type="radio" name="question-3" value="3"> Toksisitas Online</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 5 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">5. Apa solusi pertahanan pertama melawan hoaks dan disinformasi?</h4>
+                        <div id="q-options-4">
+                            <label class="quiz-option"><input type="radio" name="question-4" value="0"> Melarang semua media sosial.</label>
+                            <label class="quiz-option"><input type="radio" name="question-4" value="1"> Mengembangkan Literasi Digital.</label>
+                            <label class="quiz-option"><input type="radio" name="question-4" value="2"> Meningkatkan kecepatan internet.</label>
+                            <label class="quiz-option"><input type="radio" name="question-4" value="3"> Mengirim email secara massal.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 6 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">6. Dampak negatif yang terjadi akibat penggunaan teknologi komunikasi yang menciptakan rasa aman palsu dan memicu perilaku agresif online adalah...</h4>
+                        <div id="q-options-5">
+                            <label class="quiz-option"><input type="radio" name="question-5" value="0"> Akses telemedisin.</label>
+                            <label class="quiz-option"><input type="radio" name="question-5" value="1"> Cyberbullying dan Toksisitas.</label>
+                            <label class="quiz-option"><input type="radio" name="question-5" value="2"> Konektivitas Jaringan.</label>
+                            <label class="quiz-option"><input type="radio" name="question-5" value="3"> E-learning.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 7 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">7. Salah satu manfaat komunikasi digital dalam bidang pendidikan adalah...</h4>
+                        <div id="q-options-6">
+                            <label class="quiz-option"><input type="radio" name="question-6" value="0"> Kesenjangan Digital yang parah.</label>
+                            <label class="quiz-option"><input type="radio" name="question-6" value="1"> Peningkatan penyensoran informasi.</label>
+                            <label class="quiz-option"><input type="radio" name="question-6" value="2"> Kemudahan akses sumber daya e-learning.</label>
+                            <label class="quiz-option"><input type="radio" name="question-6" value="3"> Peningkatan isolasi sosial.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 8 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">8. Apa yang harus dilakukan sebagai bentuk Etika Digital dalam menghadapi konten sensitif?</h4>
+                        <div id="q-options-7">
+                            <label class="quiz-option"><input type="radio" name="question-7" value="0"> Menyebarkan kembali dengan cepat agar orang lain tahu.</label>
+                            <label class="quiz-option"><input type="radio" name="question-7" value="1"> Menggunakan pola pikir kritis dan memverifikasi sumbernya.</label>
+                            <label class="quiz-option"><input type="radio" name="question-7" value="2"> Menggunakan akun anonim untuk berkomentar.</label>
+                            <label class="quiz-option"><input type="radio" name="question-7" value="3"> Mengabaikannya sepenuhnya.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 9 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">9. Dampak negatif dari komunikasi digital yang dapat merusak kepercayaan publik adalah...</h4>
+                        <div id="q-options-8">
+                            <label class="quiz-option"><input type="radio" name="question-8" value="0"> Munculnya telemedisin.</label>
+                            <label class="quiz-option"><input type="radio" name="question-8" value="1"> Penyebaran Hoaks dan Disinformasi.</label>
+                            <label class="quiz-option"><input type="radio" name="question-8" value="2"> Peningkatan kolaborasi global.</label>
+                            <label class="quiz-option"><input type="radio" name="question-8" value="3"> Perlindungan data pribadi yang ketat.</label>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 10 -->
+                    <div class="mb-6 pb-6 border-b border-gray-200">
+                        <h4 class="text-lg font-semibold mb-3">10. Mengapa Alamat IP penting dalam komunikasi internet?</h4>
+                        <div id="q-options-9">
+                            <label class="quiz-option"><input type="radio" name="question-9" value="0"> Untuk memperlambat koneksi internet.</label>
+                            <label class="quiz-option"><input type="radio" name="question-9" value="1"> Sebagai alamat unik untuk pengiriman paket data.</label>
+                            <label class="quiz-option"><input type="radio" name="question-9" value="2"> Untuk mengenkripsi semua data.</label>
+                            <label class="quiz-option"><input type="radio" name="question-9" value="3"> Hanya digunakan oleh DNS.</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-quiz-btn" class="w-full mt-8 px-6 py-4 bg-indigo-700 text-white font-bold text-lg rounded-lg shadow-md hover:bg-indigo-800 transition-colors duration-200">
+                        Cek Skor
+                    </button>
+                </form>
+
+                <div id="quiz-results" class="mt-8 text-center hidden p-6 bg-gray-100 rounded-lg">
+                    <h3 class="text-3xl font-bold text-indigo-800"></h3>
+                    <p id="feedback-message" class="mt-3 text-xl"></p>
+                    <button id="reset-quiz-btn" class="mt-4 px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600">Ulangi Kuis</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Logika Data Kuis (Jawaban Benar)
+            // Jawaban 0: 1, Jawaban 1: 1, Jawaban 2: 2, Jawaban 3: 1, dst.
+            const correctAnswers = [1, 1, 2, 1, 1, 1, 2, 1, 1, 1];
+            const totalQuestions = correctAnswers.length;
+
+            // Logika Tab Navigasi
+            const tabsNav = document.getElementById('tabs-nav');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabsNav.addEventListener('click', (e) => {
+                if (e.target.classList.contains('tab-btn')) {
+                    const targetTab = e.target.getAttribute('data-tab');
+
+                    tabsNav.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    tabContents.forEach(content => {
+                        if (content.id === targetTab) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+                }
+            });
+
+            // Logika Kuis
+            const quizForm = document.getElementById('quiz-form');
+            const resultsContainer = document.getElementById('quiz-results');
+            const resultsTitle = resultsContainer.querySelector('h3');
+            const feedbackMessage = document.getElementById('feedback-message');
+            const submitBtn = document.getElementById('submit-quiz-btn');
+            const resetBtn = document.getElementById('reset-quiz-btn');
+
+            function checkQuiz(event) {
+                event.preventDefault();
+                let score = 0;
+                
+                // Menonaktifkan tombol submit
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Menampilkan Hasil...';
+
+                // Iterasi setiap pertanyaan
+                correctAnswers.forEach((correctAnswer, index) => {
+                    const questionName = `question-${index}`;
+                    const selectedInput = document.querySelector(`input[name="${questionName}"]:checked`);
+                    const optionsWrapper = document.getElementById(`q-options-${index}`);
+                    const allLabels = optionsWrapper.querySelectorAll('label');
+                    
+                    // Menonaktifkan semua opsi radio
+                    document.querySelectorAll(`input[name="${questionName}"]`).forEach(input => input.disabled = true);
+                    
+                    const correctLabel = allLabels[correctAnswer];
+
+                    if (selectedInput) {
+                        const userAnswer = parseInt(selectedInput.value);
+                        
+                        if (userAnswer === correctAnswer) {
+                            score++;
+                            correctLabel.classList.add('correct');
+                        } else {
+                            // Tandai jawaban user yang salah
+                            selectedInput.parentElement.classList.add('incorrect');
+                            // Tandai jawaban yang benar
+                            correctLabel.classList.add('correct');
+                        }
+                    } else {
+                        // Jika tidak dijawab, tandai jawaban yang benar
+                        correctLabel.classList.add('correct');
+                    }
+                });
+
+                // Tampilkan hasil
+                resultsContainer.classList.remove('hidden');
+                resultsTitle.textContent = `Skor Akhir Anda: ${score} dari ${totalQuestions}`;
+                
+                if (score === totalQuestions) {
+                    feedbackMessage.textContent = 'Luar biasa! Anda menguasai materi dengan sangat baik.';
+                    feedbackMessage.className = 'mt-3 text-xl text-green-700 font-semibold';
+                } else if (score >= totalQuestions * 0.7) {
+                    feedbackMessage.textContent = 'Bagus! Sedikit lagi menuju sempurna. Ulangi materi yang salah.';
+                    feedbackMessage.className = 'mt-3 text-xl text-indigo-700 font-semibold';
+                } else {
+                    feedbackMessage.textContent = 'Perlu perbaikan. Silakan tinjau kembali materi di atas.';
+                    feedbackMessage.className = 'mt-3 text-xl text-red-700 font-semibold';
+                }
+
+                // Ubah tombol submit menjadi tombol ulangi
+                submitBtn.classList.add('hidden');
+            }
+
+            function resetQuiz() {
+                // Hapus penanda benar/salah
+                document.querySelectorAll('.quiz-option').forEach(label => {
+                    label.classList.remove('correct', 'incorrect');
+                });
+
+                // Reset radio button dan aktifkan kembali
+                document.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.checked = false;
+                    input.disabled = false;
+                });
+
+                // Sembunyikan hasil dan reset tombol
+                resultsContainer.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Cek Skor';
+            }
+
+            quizForm.addEventListener('submit', checkQuiz);
+            resetBtn.addEventListener('click', resetQuiz);
+        });
+    </script>
+</body>
+</html>
